@@ -1,0 +1,1591 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Training\_keystroke\_pressure\_data}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{df1} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C://Users//user//Desktop//major\PYZus{}project//keystroke\PYZhy{}dynamics\PYZhy{}datagen\PYZhy{}master//Keystroke\PYZhy{}Dynamics\PYZhy{}Using\PYZhy{}LSTMs\PYZhy{}master//Keystroke\PYZhy{}Dynamics\PYZhy{}Using\PYZhy{}LSTMs\PYZhy{}master/shiva\PYZus{}appended.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{df2}\PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C://Users//user//Desktop//major\PYZus{}project//keystroke\PYZhy{}dynamics\PYZhy{}datagen\PYZhy{}master//Keystroke\PYZhy{}Dynamics\PYZhy{}Using\PYZhy{}LSTMs\PYZhy{}master//Keystroke\PYZhy{}Dynamics\PYZhy{}Using\PYZhy{}LSTMs\PYZhy{}master/shiva\PYZus{}fraud\PYZus{}appended.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{df1}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} (1000, 32)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{df2}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} (400, 32)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{df1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{df1}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:}       Name         a         b         c         d         e         f  \textbackslash{}
+        0    shiva  0.149134  0.095284  0.244418  0.078049  0.186720  0.264769   
+        1    shiva  0.120761  0.070547  0.191308  0.088534  0.160494  0.249028   
+        2    shiva  0.140864  0.054410  0.195274  0.076005  0.156120  0.232125   
+        3    shiva  0.129242  0.105580  0.234822  0.078046  0.166502  0.244548   
+        4    shiva  0.118013  0.092016  0.210029  0.061421  0.192829  0.254250   
+        5    shiva  0.134518  0.094014  0.228532  0.086808  0.149431  0.236239   
+        6    shiva  0.127765  0.088740  0.216505  0.075840  0.166529  0.242369   
+        7    shiva  0.127208  0.079946  0.207154  0.070740  0.156814  0.227554   
+        8    shiva  0.121705  0.137158  0.258863  0.101566  0.220198  0.321764   
+        9    shiva  0.129697  0.065921  0.195618  0.061359  0.208795  0.270154   
+        10   shiva  0.119006  0.071574  0.190580  0.082229  0.180850  0.263079   
+        11   shiva  0.132224  0.081134  0.213358  0.078557  0.167578  0.246135   
+        12   shiva  0.121412  0.119756  0.241168  0.074127  0.163674  0.237801   
+        13   shiva  0.135964  0.090487  0.226451  0.083830  0.159850  0.243680   
+        14   shiva  0.117640  0.113628  0.231268  0.086285  0.167559  0.253844   
+        15   shiva  0.124016  0.096282  0.220298  0.083195  0.165626  0.248821   
+        16   shiva  0.127057  0.096132  0.223189  0.086627  0.165829  0.252456   
+        17   shiva  0.116510  0.153594  0.270104  0.101442  0.172223  0.273665   
+        18   shiva  0.132247  0.107154  0.239401  0.100187  0.164164  0.264351   
+        19   shiva  0.115494  0.126623  0.242117  0.077901  0.170241  0.248142   
+        20   shiva  0.141027  0.034730  0.175757  0.076868  0.150923  0.227791   
+        21   shiva  0.134955  0.095523  0.230478  0.080458  0.172037  0.252495   
+        22   shiva  0.127286  0.929040  1.056326  0.080039  0.170866  0.250905   
+        23   shiva  0.136372  0.094654  0.231026  0.082432  0.198941  0.281373   
+        24   shiva  0.151231  0.069955  0.221186  0.062336  0.156849  0.219185   
+        25   shiva  0.148127  0.045824  0.193951  0.079270  0.158741  0.238011   
+        26   shiva  0.148410  0.077847  0.226257  0.069325  0.166986  0.236311   
+        27   shiva  0.148729  0.080619  0.229348  0.071266  0.174828  0.246094   
+        28   shiva  0.163991  0.066781  0.230772  0.059492  0.178187  0.237679   
+        29   shiva  0.151715  0.095035  0.246750  0.078456  0.219079  0.297535   
+        ..     {\ldots}       {\ldots}       {\ldots}       {\ldots}       {\ldots}       {\ldots}       {\ldots}   
+        970  shiva  0.131476  0.116864  0.248340  0.078089  0.193614  0.271703   
+        971  shiva  0.128820  0.134053  0.262873  0.100101  0.196931  0.297032   
+        972  shiva  0.122489  0.110376  0.232865  0.088629  0.182805  0.271434   
+        973  shiva  0.127765  0.088740  0.216505  0.075840  0.166529  0.242369   
+        974  shiva  0.119006  0.071574  0.190580  0.082229  0.180850  0.263079   
+        975  shiva  0.116613  0.134994  0.251607  0.089936  0.917785  1.007721   
+        976  shiva  0.157475  0.104675  0.262150  0.066637  0.177962  0.244599   
+        977  shiva  0.120761  0.070547  0.191308  0.088534  0.160494  0.249028   
+        978  shiva  0.131496  0.135926  0.267422  0.084907  0.174830  0.259737   
+        979  shiva  0.141027  0.034730  0.175757  0.076868  0.150923  0.227791   
+        980  shiva  0.131684  0.096198  0.227882  0.079262  0.172220  0.251482   
+        981  shiva  0.124260  0.105569  0.229829  0.096186  0.172695  0.268881   
+        982  shiva  0.131755  0.106838  0.238593  0.075212  0.173389  0.248601   
+        983  shiva  0.159359  0.075281  0.234640  0.099307  0.170280  0.269587   
+        984  shiva  0.132393  0.122808  0.255201  0.079592  0.169884  0.249476   
+        985  shiva  0.148049  0.130700  0.278749  0.080686  0.181992  0.262678   
+        986  shiva  0.144958  0.075466  0.220424  0.071648  0.174865  0.246513   
+        987  shiva  0.149779  0.072558  0.222337  0.062751  0.178207  0.240958   
+        988  shiva  0.145500  0.163401  0.308901  0.139617  0.194402  0.334019   
+        989  shiva  0.149916  0.099695  0.249611  0.077750  0.178856  0.256606   
+        990  shiva  0.127208  0.079946  0.207154  0.070740  0.156814  0.227554   
+        991  shiva  0.148729  0.080619  0.229348  0.071266  0.174828  0.246094   
+        992  shiva  0.120761  0.070547  0.191308  0.088534  0.160494  0.249028   
+        993  shiva  0.141027  0.034730  0.175757  0.076868  0.150923  0.227791   
+        994  shiva  0.140864  0.054410  0.195274  0.076005  0.156120  0.232125   
+        995  shiva  0.147444  0.129234  0.276678  0.087070  0.186962  0.274032   
+        996  shiva  0.148127  0.045824  0.193951  0.079270  0.158741  0.238011   
+        997  shiva  0.129242  0.105580  0.234822  0.078046  0.166502  0.244548   
+        998  shiva  0.151231  0.069955  0.221186  0.062336  0.156849  0.219185   
+        999  shiva  0.140886  0.101096  0.241982  0.091312  0.182766  0.274078   
+        
+                    g         h         i   {\ldots}    Previous\_latitude  \textbackslash{}
+        0    0.111879  0.155903  0.267782   {\ldots}            12.914142   
+        1    0.094145  0.191520  0.285665   {\ldots}            12.914142   
+        2    0.090494  0.174344  0.264838   {\ldots}            12.914142   
+        3    0.114891  0.166035  0.280926   {\ldots}            12.914142   
+        4    0.101509  0.200519  0.302028   {\ldots}            12.914142   
+        5    0.103294  0.152674  0.255968   {\ldots}            12.914142   
+        6    0.103503  0.175213  0.278716   {\ldots}            12.914142   
+        7    0.116135  0.155930  0.272065   {\ldots}            12.914142   
+        8    0.107232  0.196172  0.303404   {\ldots}            12.971599   
+        9    0.123665  0.213836  0.337501   {\ldots}            12.971599   
+        10   0.103484  0.174475  0.277959   {\ldots}            12.971599   
+        11   0.106448  0.176636  0.283084   {\ldots}            12.971599   
+        12   0.099525  0.176000  0.275525   {\ldots}            12.971599   
+        13   0.095956  0.170800  0.266756   {\ldots}            12.971599   
+        14   0.089630  0.186125  0.275755   {\ldots}            12.971599   
+        15   0.091296  0.182363  0.273659   {\ldots}            12.971599   
+        16   0.111750  0.168374  0.280124   {\ldots}            12.971599   
+        17   0.095774  0.196121  0.291895   {\ldots}            12.971599   
+        18   0.100222  0.168663  0.268885   {\ldots}            12.971599   
+        19   0.105503  0.171630  0.277133   {\ldots}            12.971599   
+        20   0.104143  0.150265  0.254408   {\ldots}            17.385044   
+        21   0.084993  0.173758  0.258751   {\ldots}            17.385044   
+        22   0.075888  2.718690  2.794578   {\ldots}            17.385044   
+        23   0.086762  0.192530  0.279292   {\ldots}            17.385044   
+        24   0.087188  0.181895  0.269083   {\ldots}            17.385044   
+        25   0.086865  0.227050  0.313915   {\ldots}            17.385044   
+        26   0.093047  0.186510  0.279557   {\ldots}            17.385044   
+        27   0.100920  0.181726  0.282646   {\ldots}            17.385044   
+        28   0.089581  0.192994  0.282575   {\ldots}            17.385044   
+        29   0.091544  0.189296  0.280840   {\ldots}            17.385044   
+        ..        {\ldots}       {\ldots}       {\ldots}   {\ldots}                  {\ldots}   
+        970  0.092365  0.186874  0.279239   {\ldots}            13.082680   
+        971  0.102865  0.183128  0.285993   {\ldots}            42.331429   
+        972  0.096440  0.166614  0.263054   {\ldots}            34.083672   
+        973  0.103503  0.175213  0.278716   {\ldots}            12.914142   
+        974  0.103484  0.174475  0.277959   {\ldots}            12.971599   
+        975  0.074449  0.246173  0.320622   {\ldots}           -33.868820   
+        976  0.116807  0.168576  0.285383   {\ldots}            36.778259   
+        977  0.094145  0.191520  0.285665   {\ldots}            12.914142   
+        978  0.081979  0.179928  0.261907   {\ldots}            28.704060   
+        979  0.104143  0.150265  0.254408   {\ldots}            17.385044   
+        980  0.081082  0.177832  0.258914   {\ldots}            19.075983   
+        981  0.075813  0.210651  0.286464   {\ldots}           -33.868820   
+        982  0.088803  0.158674  0.247477   {\ldots}            36.778259   
+        983  0.095572  0.181063  0.276635   {\ldots}            34.083672   
+        984  0.095643  0.186131  0.281774   {\ldots}            19.075983   
+        985  0.101465  0.180730  0.282195   {\ldots}            19.075983   
+        986  0.128864  0.143163  0.272027   {\ldots}            36.778259   
+        987  0.092234  0.170079  0.262313   {\ldots}            42.331429   
+        988  0.085928  0.199236  0.285164   {\ldots}            34.083672   
+        989  0.098549  0.175131  0.273680   {\ldots}           -33.868820   
+        990  0.116135  0.155930  0.272065   {\ldots}            12.914142   
+        991  0.100920  0.181726  0.282646   {\ldots}            17.385044   
+        992  0.094145  0.191520  0.285665   {\ldots}            12.914142   
+        993  0.104143  0.150265  0.254408   {\ldots}            17.385044   
+        994  0.090494  0.174344  0.264838   {\ldots}            12.914142   
+        995  0.102599  0.176595  0.279194   {\ldots}            13.082680   
+        996  0.086865  0.227050  0.313915   {\ldots}            17.385044   
+        997  0.114891  0.166035  0.280926   {\ldots}            12.914142   
+        998  0.087188  0.181895  0.269083   {\ldots}            17.385044   
+        999  0.098820  0.189565  0.288385   {\ldots}            13.082680   
+        
+             Previous\_longitude  Previous\_latitude.1  Present\_longitude  pressure\_s  \textbackslash{}
+        0             74.855957            12.914142          74.855957       801.0   
+        1             74.855957            12.971599          77.594566       939.0   
+        2             74.855957            17.385044          78.486671       899.0   
+        3             74.855957            42.331429         -83.045753       913.0   
+        4             74.855957            36.778259        -119.417931       949.0   
+        5             74.855957            28.704060          77.102493       846.0   
+        6             74.855957            13.082680          80.270721       964.0   
+        7             74.855957            19.075983          72.877655       905.0   
+        8             77.594566            34.083672          74.797279       656.0   
+        9             77.594566           -33.868820         151.209290       863.0   
+        10            77.594566            12.914142          74.855957       922.0   
+        11            77.594566            12.971599          77.594566       877.0   
+        12            77.594566            17.385044          78.486671       772.0   
+        13            77.594566            42.331429         -83.045753       467.0   
+        14            77.594566            36.778259        -119.417931       823.0   
+        15            77.594566            28.704060          77.102493       960.0   
+        16            77.594566            13.082680          80.270721       644.0   
+        17            77.594566            19.075983          72.877655       948.0   
+        18            77.594566            34.083672          74.797279       832.0   
+        19            77.594566           -33.868820         151.209290       897.0   
+        20            78.486671            12.914142          74.855957       737.0   
+        21            78.486671            12.971599          77.594566       797.0   
+        22            78.486671            17.385044          78.486671       930.0   
+        23            78.486671            42.331429         -83.045753       851.0   
+        24            78.486671            36.778259        -119.417931       621.0   
+        25            78.486671            28.704060          77.102493       923.0   
+        26            78.486671            13.082680          80.270721       485.0   
+        27            78.486671            19.075983          72.877655       889.0   
+        28            78.486671            34.083672          74.797279       931.0   
+        29            78.486671           -33.868820         151.209290       924.0   
+        ..                  {\ldots}                  {\ldots}                {\ldots}         {\ldots}   
+        970           80.270721            19.075983          72.877655       707.5   
+        971          -83.045753            13.082680          80.270721       889.0   
+        972           74.797279            17.385044          78.486671       938.0   
+        973           74.855957            13.082680          80.270721       644.0   
+        974           77.594566            12.914142          74.855957       941.0   
+        975          151.209290            17.385044          78.486671       639.0   
+        976         -119.417931            34.083672          74.797279       899.0   
+        977           74.855957            12.971599          77.594566       809.0   
+        978           77.102493            19.075983          72.877655       865.0   
+        979           78.486671            12.914142          74.855957       700.0   
+        980           72.877655            36.778259        -119.417931       957.0   
+        981          151.209290            19.075983          72.877655       844.0   
+        982         -119.417931            19.075983          72.877655       912.0   
+        983           74.797279            12.971599          77.594566       934.0   
+        984           72.877655            28.704060          77.102493       843.0   
+        985           72.877655            19.075983          72.877655       957.0   
+        986         -119.417931            12.971599          77.594566       904.0   
+        987          -83.045753            42.331429         -83.045753       939.0   
+        988           74.797279            42.331429         -83.045753       912.0   
+        989          151.209290            12.971599          77.594566       944.0   
+        990           74.855957            19.075983          72.877655       936.0   
+        991           78.486671            19.075983          72.877655       749.0   
+        992           74.855957            12.971599          77.594566       957.0   
+        993           78.486671            12.914142          74.855957       934.0   
+        994           74.855957            17.385044          78.486671       916.0   
+        995           80.270721            34.083672          74.797279       886.0   
+        996           78.486671            28.704060          77.102493       961.0   
+        997           74.855957            42.331429         -83.045753       954.0   
+        998           78.486671            36.778259        -119.417931       888.0   
+        999           80.270721            12.971599          77.594566       779.0   
+        
+             pressure\_h  pressure\_i  pressure\_v  pressure\_a  output  
+        0         796.0         368         690       798.0       1  
+        1         719.0         928         831       409.0       1  
+        2         353.0         956         907       624.0       1  
+        3         593.0         886         931       934.0       1  
+        4         603.0         905         925       911.0       1  
+        5         827.0         564         279       924.0       1  
+        6         600.0         961         754       953.0       1  
+        7         736.0         322         920       809.0       1  
+        8         441.0         924         320       934.0       1  
+        9         939.0         914         914       888.0       1  
+        10        628.0         245         871       909.0       1  
+        11        493.0         735         668       810.0       1  
+        12        807.0         424         472       900.0       1  
+        13        825.0         949         495       934.0       1  
+        14        837.0         955         934       630.0       1  
+        15        301.0         901         693       800.0       1  
+        16        835.0         965         947       959.0       1  
+        17        841.0         940         951       218.0       1  
+        18        554.0         847         930       841.0       1  
+        19        431.0         909         685       932.0       1  
+        20        838.0         848         630       646.0       1  
+        21        740.0         524         920       918.0       1  
+        22        614.0         896         701       919.0       1  
+        23        716.0         247         844       647.0       1  
+        24        242.0         916         905       450.0       1  
+        25        265.0         108         903       660.0       1  
+        26        377.0         815         927       638.0       1  
+        27        427.0         942         175       914.0       1  
+        28        600.0         552         397       380.0       1  
+        29        244.0         953         875       880.0       1  
+        ..          {\ldots}         {\ldots}         {\ldots}         {\ldots}     {\ldots}  
+        970       588.0         573         925       888.0       1  
+        971       593.0         932         900       860.0       1  
+        972       613.0         950         911       895.0       1  
+        973       835.0         965         947       959.0       1  
+        974       644.0         932         772       868.0       1  
+        975       615.5         811         795       899.0       1  
+        976       353.0         956         907       624.0       1  
+        977       622.0         942         940       770.0       1  
+        978       723.0         105         321       738.0       1  
+        979       679.0         907         932       925.0       1  
+        980       592.0         880         874       932.0       1  
+        981       929.0         928         894       841.0       1  
+        982       582.0         939         940       837.0       1  
+        983       452.0         757         786       940.0       1  
+        984       592.0         923         935       780.0       1  
+        985       639.0         942         411       955.0       1  
+        986       738.0         819         870       941.0       1  
+        987       609.0         928         894       350.0       1  
+        988       775.0         891         259       641.0       1  
+        989       866.0         934         386       289.0       1  
+        990       655.0         756         920       900.0       1  
+        991       502.0         920         890       800.0       1  
+        992       442.0         920         944       928.0       1  
+        993       452.0         757         786       940.0       1  
+        994       619.0         931         720       785.0       1  
+        995       573.0         922         902       790.0       1  
+        996       782.0         928         960       850.0       1  
+        997       784.0         862         894       960.0       1  
+        998       682.0         944         804       885.0       1  
+        999       447.0         926         946       756.0       1  
+        
+        [1000 rows x 33 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{df2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{l+m+mi}{0}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{df2}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:}        Name         a         b         c         d         e         f  \textbackslash{}
+        0    fshiva  0.165581  0.078276  0.243857  0.146824  0.102373  0.249197   
+        1    fshiva  0.140557  0.508879  0.649436  0.083952  0.403836  0.487788   
+        2    fshiva  0.156596  0.403169  0.559765  0.073859  0.490833  0.564692   
+        3    fshiva  0.143176  0.648242  0.791418  0.066525  0.493274  0.559799   
+        4    fshiva  0.139343  0.355161  0.494504  0.070443  0.383469  0.453912   
+        5    fshiva  0.134435  0.183401  0.317836  0.077139  0.419668  0.496807   
+        6    fshiva  0.153799  0.366636  0.520435  0.077743  0.695374  0.773117   
+        7    fshiva  0.119315  0.321975  0.441290  0.084874  0.821977  0.906851   
+        8    fshiva  0.138519  0.530176  0.668695  0.048252  0.590528  0.638780   
+        9    fshiva  0.166834  0.460473  0.627307  0.065617  0.566090  0.631707   
+        10   fshiva  0.171424  0.216911  0.388335  0.172012  0.072334  0.244346   
+        11   fshiva  0.161652  0.187839  0.349491  0.071358  0.302354  0.373712   
+        12   fshiva  0.162403  0.168945  0.331348  0.052644  0.292010  0.344654   
+        13   fshiva  0.132720  0.235686  0.368406  0.054862  0.334827  0.389689   
+        14   fshiva  0.160303  0.194739  0.355042  0.061117  0.343428  0.404545   
+        15   fshiva  0.160611  0.159918  0.320529  0.061984  0.298384  0.360368   
+        16   fshiva  0.152873  0.204905  0.357778  0.054273  1.040737  1.095010   
+        17   fshiva  0.152979  0.162821  0.315800  0.064196  0.282028  0.346224   
+        18   fshiva  0.166838  0.277165  0.444003  0.061005  0.298263  0.359268   
+        19   fshiva  0.150586  0.232177  0.382763  0.065621  0.290541  0.356162   
+        20   fshiva  0.147913  1.721168  1.869081  0.065014  0.228719  0.293733   
+        21   fshiva  0.166452  0.512925  0.679377  0.072721  0.248519  0.321240   
+        22   fshiva  0.147514  0.100547  0.248061  0.149709  0.062831  0.212540   
+        23   fshiva  0.143311  0.217581  0.360892  0.065497  0.289640  0.355137   
+        24   fshiva  0.125534  0.167495  0.293029  0.067131  0.236854  0.303985   
+        25   fshiva  0.160091  0.209464  0.369555  0.058940  0.287977  0.346917   
+        26   fshiva  0.167163  0.480048  0.647211  0.065894  0.282048  0.347942   
+        27   fshiva  0.149753  0.666165  0.815918  0.089363  1.175806  1.265169   
+        28   fshiva  0.144354  0.301870  0.446224  0.067651  0.321877  0.389528   
+        29   fshiva  0.153160  0.260336  0.413496  0.081264  0.305953  0.387217   
+        ..      {\ldots}       {\ldots}       {\ldots}       {\ldots}       {\ldots}       {\ldots}       {\ldots}   
+        370  fshiva  0.154904  0.217026  0.371930  0.104975  0.187105  0.292080   
+        371  fshiva  0.137211  0.213856  0.351067  0.051877  0.259691  0.311568   
+        372  fshiva  0.117532  0.258235  0.375767  0.069487  0.290136  0.359623   
+        373  fshiva  0.156130  0.208047  0.364177  0.068446  0.276742  0.345188   
+        374  fshiva  0.118851  0.098664  0.217515  0.064784  0.133224  0.198008   
+        375  fshiva  0.136071  0.287397  0.423468  0.097197  0.302100  0.399297   
+        376  fshiva  0.112465  0.365633  0.478098  0.072247  0.267921  0.340168   
+        377  fshiva  0.149753  0.666165  0.815918  0.089363  1.175806  1.265169   
+        378  fshiva  0.130632  0.195886  0.326518  0.085327  0.267471  0.352798   
+        379  fshiva  0.135848  0.228872  0.364720  0.051904  0.257436  0.309340   
+        380  fshiva  0.132877  0.187844  0.320721  0.054373  0.268036  0.322409   
+        381  fshiva  0.171424  0.216911  0.388335  0.172012  0.072334  0.244346   
+        382  fshiva  0.144981  0.176854  0.321835  0.066146  0.304939  0.371085   
+        383  fshiva  0.167163  0.480048  0.647211  0.065894  0.282048  0.347942   
+        384  fshiva  0.143311  0.217581  0.360892  0.065497  0.289640  0.355137   
+        385  fshiva  0.140853  0.206594  0.347447  0.054302  0.258058  0.312360   
+        386  fshiva  0.136730  0.179159  0.315889  0.063747  0.301113  0.364860   
+        387  fshiva  0.166834  0.460473  0.627307  0.065617  0.566090  0.631707   
+        388  fshiva  0.152873  0.204905  0.357778  0.054273  1.040737  1.095010   
+        389  fshiva  0.150586  0.232177  0.382763  0.065621  0.290541  0.356162   
+        390  fshiva  0.138278  0.317589  0.455867  0.074605  0.318397  0.393002   
+        391  fshiva  0.160091  0.209464  0.369555  0.058940  0.287977  0.346917   
+        392  fshiva  0.111551  0.199596  0.311147  0.058617  0.267945  0.326562   
+        393  fshiva  0.149202  0.606610  0.755812  0.080820  0.306213  0.387033   
+        394  fshiva  0.138519  0.530176  0.668695  0.048252  0.590528  0.638780   
+        395  fshiva  0.154248  0.128296  0.282544  0.090151  0.137850  0.228001   
+        396  fshiva  0.115292  0.207154  0.322446  0.063008  0.302537  0.365545   
+        397  fshiva  0.161652  0.187839  0.349491  0.071358  0.302354  0.373712   
+        398  fshiva  0.113651  0.260368  0.374019  0.058543  1.161646  1.220189   
+        399  fshiva  0.141645  0.162381  0.304026  0.072753  0.246706  0.319459   
+        
+                    g         h         i   {\ldots}    Previous\_latitude  \textbackslash{}
+        0    0.139691  1.539032  1.678723   {\ldots}            12.914142   
+        1    0.088415  0.641942  0.730357   {\ldots}            12.914142   
+        2    0.064429  0.453682  0.518111   {\ldots}            12.914142   
+        3    0.065243  0.667238  0.732481   {\ldots}            12.914142   
+        4    0.071446  0.806393  0.877839   {\ldots}            12.914142   
+        5    0.064199  0.487816  0.552015   {\ldots}            12.914142   
+        6    0.077838  0.625723  0.703561   {\ldots}            12.914142   
+        7    0.076056  0.439779  0.515835   {\ldots}            12.914142   
+        8    0.062953  0.589164  0.652117   {\ldots}            12.971599   
+        9    0.062291  0.600932  0.663223   {\ldots}            12.971599   
+        10   0.111991  0.218722  0.330713   {\ldots}            12.971599   
+        11   0.082195  0.335884  0.418079   {\ldots}            12.971599   
+        12   0.066651  0.355703  0.422354   {\ldots}            12.971599   
+        13   0.056189  0.652287  0.708476   {\ldots}            12.971599   
+        14   0.061160  0.402431  0.463591   {\ldots}            12.971599   
+        15   0.064291  0.377758  0.442049   {\ldots}            12.971599   
+        16   0.063635  0.405597  0.469232   {\ldots}            12.971599   
+        17   0.057260  0.372249  0.429509   {\ldots}            12.971599   
+        18   0.063098  0.479687  0.542785   {\ldots}            12.971599   
+        19   0.068745  0.355273  0.424018   {\ldots}            12.971599   
+        20   0.082028  0.266378  0.348406   {\ldots}            17.385044   
+        21   0.097471  0.175877  0.273348   {\ldots}            17.385044   
+        22   0.104066  0.191092  0.295158   {\ldots}            17.385044   
+        23   0.081670  0.402541  0.484211   {\ldots}            17.385044   
+        24   0.098875  2.822481  2.921356   {\ldots}            17.385044   
+        25   0.077001  0.331855  0.408856   {\ldots}            17.385044   
+        26   0.077144  3.514770  3.591914   {\ldots}            17.385044   
+        27   0.070951  1.730752  1.801703   {\ldots}            17.385044   
+        28   0.094147  0.352078  0.446225   {\ldots}            17.385044   
+        29   0.089063  0.346964  0.436027   {\ldots}            17.385044   
+        ..        {\ldots}       {\ldots}       {\ldots}   {\ldots}                  {\ldots}   
+        370  0.103629  0.289511  0.393140   {\ldots}           -33.868820   
+        371  0.056099  0.318409  0.374508   {\ldots}            19.075983   
+        372  0.093159  0.307386  0.400545   {\ldots}            42.331429   
+        373  0.092819  0.250871  0.343690   {\ldots}           -33.868820   
+        374  0.011182  1.876498  1.887680   {\ldots}            19.075983   
+        375  0.105986  0.295416  0.401402   {\ldots}           -33.868820   
+        376  0.078462  0.318579  0.397041   {\ldots}           -33.868820   
+        377  0.070951  1.730752  1.801703   {\ldots}            17.385044   
+        378  0.079192  0.433120  0.512312   {\ldots}            36.778259   
+        379  0.061449  0.303281  0.364730   {\ldots}            36.778259   
+        380  0.049965  0.323428  0.373393   {\ldots}            36.778259   
+        381  0.111991  0.218722  0.330713   {\ldots}            12.971599   
+        382  0.073299  0.368330  0.441629   {\ldots}            42.331429   
+        383  0.077144  3.514770  3.591914   {\ldots}            17.385044   
+        384  0.081670  0.402541  0.484211   {\ldots}            17.385044   
+        385  0.054899  2.139276  2.194175   {\ldots}            42.331429   
+        386  0.066712  0.304881  0.371593   {\ldots}            34.083672   
+        387  0.062291  0.600932  0.663223   {\ldots}            12.971599   
+        388  0.063635  0.405597  0.469232   {\ldots}            12.971599   
+        389  0.068745  0.355273  0.424018   {\ldots}            12.971599   
+        390  0.085205  0.451699  0.536904   {\ldots}            36.778259   
+        391  0.077001  0.331855  0.408856   {\ldots}            17.385044   
+        392  0.069940  0.298894  0.368834   {\ldots}            34.083672   
+        393  0.073878  0.332589  0.406467   {\ldots}            19.075983   
+        394  0.062953  0.589164  0.652117   {\ldots}            12.971599   
+        395  0.092422  0.233860  0.326282   {\ldots}            36.778259   
+        396  0.081431  0.340915  0.422346   {\ldots}            28.704060   
+        397  0.082195  0.335884  0.418079   {\ldots}            12.971599   
+        398  0.062964  0.363273  0.426237   {\ldots}            28.704060   
+        399  0.068451  0.300868  0.369319   {\ldots}            34.083672   
+        
+             Previous\_longitude  Previous\_latitude.1  Present\_longitude  pressure\_s  \textbackslash{}
+        0             74.855957            12.914142          74.855957  886.000000   
+        1             74.855957            12.971599          77.594566  966.000000   
+        2             74.855957            17.385044          78.486671  694.000000   
+        3             74.855957            42.331429         -83.045753  895.000000   
+        4             74.855957            36.778259        -119.417931  491.000000   
+        5             74.855957            28.704060          77.102493  379.333333   
+        6             74.855957            13.082680          80.270721  722.000000   
+        7             74.855957            19.075983          72.877655  842.000000   
+        8             77.594566            34.083672          74.797279  341.000000   
+        9             77.594566           -33.868820         151.209290  685.000000   
+        10            77.594566            12.914142          74.855957  386.500000   
+        11            77.594566            12.971599          77.594566  741.000000   
+        12            77.594566            17.385044          78.486671  708.000000   
+        13            77.594566            42.331429         -83.045753  775.000000   
+        14            77.594566            36.778259        -119.417931  737.000000   
+        15            77.594566            28.704060          77.102493  607.000000   
+        16            77.594566            13.082680          80.270721  461.250000   
+        17            77.594566            19.075983          72.877655  689.000000   
+        18            77.594566            34.083672          74.797279  693.000000   
+        19            77.594566           -33.868820         151.209290  389.500000   
+        20            78.486671            12.914142          74.855957  562.000000   
+        21            78.486671            12.971599          77.594566  337.000000   
+        22            78.486671            17.385044          78.486671  380.000000   
+        23            78.486671            42.331429         -83.045753  721.000000   
+        24            78.486671            36.778259        -119.417931  591.000000   
+        25            78.486671            28.704060          77.102493  753.000000   
+        26            78.486671            13.082680          80.270721  421.000000   
+        27            78.486671            19.075983          72.877655  754.000000   
+        28            78.486671            34.083672          74.797279  227.000000   
+        29            78.486671           -33.868820         151.209290  499.000000   
+        ..                  {\ldots}                  {\ldots}                {\ldots}         {\ldots}   
+        370          151.209290            19.075983          72.877655  685.000000   
+        371           72.877655            13.082680          80.270721  264.000000   
+        372          -83.045753            12.914142          74.855957  729.000000   
+        373          151.209290            36.778259        -119.417931  386.500000   
+        374           72.877655            28.704060          77.102493  497.000000   
+        375          151.209290           -33.868820         151.209290  337.000000   
+        376          151.209290            12.971599          77.594566  805.000000   
+        377           78.486671            19.075983          72.877655  423.500000   
+        378         -119.417931           -33.868820         151.209290  789.000000   
+        379         -119.417931            12.971599          77.594566  729.000000   
+        380         -119.417931            36.778259        -119.417931  671.000000   
+        381           77.594566            12.914142          74.855957  752.000000   
+        382          -83.045753            42.331429         -83.045753  431.000000   
+        383           78.486671            13.082680          80.270721  431.000000   
+        384           78.486671            42.331429         -83.045753  426.000000   
+        385          -83.045753            13.082680          80.270721  716.000000   
+        386           74.797279           -33.868820         151.209290  210.000000   
+        387           77.594566           -33.868820         151.209290  737.000000   
+        388           77.594566            13.082680          80.270721  741.000000   
+        389           77.594566           -33.868820         151.209290  530.000000   
+        390         -119.417931            34.083672          74.797279  521.000000   
+        391           78.486671            28.704060          77.102493  667.000000   
+        392           74.797279            34.083672          74.797279  357.000000   
+        393           72.877655            17.385044          78.486671  822.000000   
+        394           77.594566            34.083672          74.797279  910.000000   
+        395         -119.417931            12.914142          74.855957  829.000000   
+        396           77.102493            12.914142          74.855957  731.000000   
+        397           77.594566            12.971599          77.594566  394.500000   
+        398           77.102493            19.075983          72.877655  408.500000   
+        399           74.797279            28.704060          77.102493  722.000000   
+        
+             pressure\_h  pressure\_i  pressure\_v  pressure\_a  output  
+        0         813.0       899.0       101.0       815.0       0  
+        1         698.0       897.5       225.0       351.0       0  
+        2         748.0       661.0       446.0       620.0       0  
+        3         942.0       877.0       421.0       865.0       0  
+        4         493.0       922.0       425.0       641.0       0  
+        5         776.0       795.0       412.0       277.5       0  
+        6         775.0       371.0       357.0       867.0       0  
+        7         303.0       925.0       398.0       228.0       0  
+        8         752.0       808.0       428.0       581.0       0  
+        9         743.0       699.0       365.0       507.0       0  
+        10        748.0       665.0       176.0       435.0       0  
+        11        949.0       819.0       401.5       895.0       0  
+        12        754.0       779.0       384.0       624.0       0  
+        13        728.0       445.5       396.0       626.0       0  
+        14        817.0       790.0       249.0       719.0       0  
+        15        763.0       674.0       192.0       390.0       0  
+        16        662.0       396.0       371.0       331.0       0  
+        17        760.0       744.0       356.0       623.0       0  
+        18        763.0       637.0       353.0       631.0       0  
+        19        331.0       320.0       371.0       585.0       0  
+        20        693.0       646.0       354.0       373.0       0  
+        21        570.0       734.0       647.0       608.0       0  
+        22        433.0       813.0       350.0       658.0       0  
+        23        282.0       800.0       338.0       652.0       0  
+        24        710.0       406.0       399.0       638.0       0  
+        25        766.0       697.0       361.0       417.5       0  
+        26        589.0       401.0       160.0       606.0       0  
+        27        478.0       527.0       349.0       398.0       0  
+        28        782.0       632.0       411.0       597.0       0  
+        29        644.0       777.0       389.0       604.0       0  
+        ..          {\ldots}         {\ldots}         {\ldots}         {\ldots}     {\ldots}  
+        370       743.0       699.0       365.0       507.0       0  
+        371       435.0       791.0       830.0       665.0       0  
+        372       796.0       881.0       605.0       105.0       0  
+        373       748.0       665.0       176.0       435.0       0  
+        374       561.0       832.0       536.0       629.0       0  
+        375       570.0       734.0       647.0       608.0       0  
+        376       915.0       870.0       609.0       947.0       0  
+        377       807.0       766.0       339.0       692.0       0  
+        378       834.0       526.0       709.0       624.0       0  
+        379       462.0       897.0       390.0       748.0       0  
+        380       839.0       251.0       566.0       627.0       0  
+        381       505.0       939.0       918.0       371.0       0  
+        382       806.0       899.0       705.0       707.0       0  
+        383       806.0       899.0       705.0       707.0       0  
+        384       875.0       814.0       852.0       628.0       0  
+        385       822.0       164.0       368.0       634.0       0  
+        386       882.0       446.0       890.0       652.0       0  
+        387       817.0       790.0       249.0       719.0       0  
+        388       949.0       819.0       401.5       895.0       0  
+        389       836.0       844.0       232.0       661.0       0  
+        390       797.0       549.0       572.0       402.0       0  
+        391       591.0       860.0       731.0       616.0       0  
+        392       850.0       259.0       676.0       721.0       0  
+        393       844.0       404.0       277.0       633.0       0  
+        394       938.0       800.0       662.0       647.0       0  
+        395       860.0       888.0       536.0       790.0       0  
+        396       471.0       183.0       759.0       670.0       0  
+        397       805.0       615.0       101.0       371.0       0  
+        398       831.0       897.0       732.0       631.0       0  
+        399       775.0       371.0       357.0       867.0       0  
+        
+        [400 rows x 33 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{df\PYZus{}train}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{df1}\PY{p}{,} \PY{n}{df2}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{df\PYZus{}train}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:}        Name         a         b         c         d         e         f  \textbackslash{}
+         0     shiva  0.149134  0.095284  0.244418  0.078049  0.186720  0.264769   
+         1     shiva  0.120761  0.070547  0.191308  0.088534  0.160494  0.249028   
+         2     shiva  0.140864  0.054410  0.195274  0.076005  0.156120  0.232125   
+         3     shiva  0.129242  0.105580  0.234822  0.078046  0.166502  0.244548   
+         4     shiva  0.118013  0.092016  0.210029  0.061421  0.192829  0.254250   
+         5     shiva  0.134518  0.094014  0.228532  0.086808  0.149431  0.236239   
+         6     shiva  0.127765  0.088740  0.216505  0.075840  0.166529  0.242369   
+         7     shiva  0.127208  0.079946  0.207154  0.070740  0.156814  0.227554   
+         8     shiva  0.121705  0.137158  0.258863  0.101566  0.220198  0.321764   
+         9     shiva  0.129697  0.065921  0.195618  0.061359  0.208795  0.270154   
+         10    shiva  0.119006  0.071574  0.190580  0.082229  0.180850  0.263079   
+         11    shiva  0.132224  0.081134  0.213358  0.078557  0.167578  0.246135   
+         12    shiva  0.121412  0.119756  0.241168  0.074127  0.163674  0.237801   
+         13    shiva  0.135964  0.090487  0.226451  0.083830  0.159850  0.243680   
+         14    shiva  0.117640  0.113628  0.231268  0.086285  0.167559  0.253844   
+         15    shiva  0.124016  0.096282  0.220298  0.083195  0.165626  0.248821   
+         16    shiva  0.127057  0.096132  0.223189  0.086627  0.165829  0.252456   
+         17    shiva  0.116510  0.153594  0.270104  0.101442  0.172223  0.273665   
+         18    shiva  0.132247  0.107154  0.239401  0.100187  0.164164  0.264351   
+         19    shiva  0.115494  0.126623  0.242117  0.077901  0.170241  0.248142   
+         20    shiva  0.141027  0.034730  0.175757  0.076868  0.150923  0.227791   
+         21    shiva  0.134955  0.095523  0.230478  0.080458  0.172037  0.252495   
+         22    shiva  0.127286  0.929040  1.056326  0.080039  0.170866  0.250905   
+         23    shiva  0.136372  0.094654  0.231026  0.082432  0.198941  0.281373   
+         24    shiva  0.151231  0.069955  0.221186  0.062336  0.156849  0.219185   
+         25    shiva  0.148127  0.045824  0.193951  0.079270  0.158741  0.238011   
+         26    shiva  0.148410  0.077847  0.226257  0.069325  0.166986  0.236311   
+         27    shiva  0.148729  0.080619  0.229348  0.071266  0.174828  0.246094   
+         28    shiva  0.163991  0.066781  0.230772  0.059492  0.178187  0.237679   
+         29    shiva  0.151715  0.095035  0.246750  0.078456  0.219079  0.297535   
+         ..      {\ldots}       {\ldots}       {\ldots}       {\ldots}       {\ldots}       {\ldots}       {\ldots}   
+         370  fshiva  0.154904  0.217026  0.371930  0.104975  0.187105  0.292080   
+         371  fshiva  0.137211  0.213856  0.351067  0.051877  0.259691  0.311568   
+         372  fshiva  0.117532  0.258235  0.375767  0.069487  0.290136  0.359623   
+         373  fshiva  0.156130  0.208047  0.364177  0.068446  0.276742  0.345188   
+         374  fshiva  0.118851  0.098664  0.217515  0.064784  0.133224  0.198008   
+         375  fshiva  0.136071  0.287397  0.423468  0.097197  0.302100  0.399297   
+         376  fshiva  0.112465  0.365633  0.478098  0.072247  0.267921  0.340168   
+         377  fshiva  0.149753  0.666165  0.815918  0.089363  1.175806  1.265169   
+         378  fshiva  0.130632  0.195886  0.326518  0.085327  0.267471  0.352798   
+         379  fshiva  0.135848  0.228872  0.364720  0.051904  0.257436  0.309340   
+         380  fshiva  0.132877  0.187844  0.320721  0.054373  0.268036  0.322409   
+         381  fshiva  0.171424  0.216911  0.388335  0.172012  0.072334  0.244346   
+         382  fshiva  0.144981  0.176854  0.321835  0.066146  0.304939  0.371085   
+         383  fshiva  0.167163  0.480048  0.647211  0.065894  0.282048  0.347942   
+         384  fshiva  0.143311  0.217581  0.360892  0.065497  0.289640  0.355137   
+         385  fshiva  0.140853  0.206594  0.347447  0.054302  0.258058  0.312360   
+         386  fshiva  0.136730  0.179159  0.315889  0.063747  0.301113  0.364860   
+         387  fshiva  0.166834  0.460473  0.627307  0.065617  0.566090  0.631707   
+         388  fshiva  0.152873  0.204905  0.357778  0.054273  1.040737  1.095010   
+         389  fshiva  0.150586  0.232177  0.382763  0.065621  0.290541  0.356162   
+         390  fshiva  0.138278  0.317589  0.455867  0.074605  0.318397  0.393002   
+         391  fshiva  0.160091  0.209464  0.369555  0.058940  0.287977  0.346917   
+         392  fshiva  0.111551  0.199596  0.311147  0.058617  0.267945  0.326562   
+         393  fshiva  0.149202  0.606610  0.755812  0.080820  0.306213  0.387033   
+         394  fshiva  0.138519  0.530176  0.668695  0.048252  0.590528  0.638780   
+         395  fshiva  0.154248  0.128296  0.282544  0.090151  0.137850  0.228001   
+         396  fshiva  0.115292  0.207154  0.322446  0.063008  0.302537  0.365545   
+         397  fshiva  0.161652  0.187839  0.349491  0.071358  0.302354  0.373712   
+         398  fshiva  0.113651  0.260368  0.374019  0.058543  1.161646  1.220189   
+         399  fshiva  0.141645  0.162381  0.304026  0.072753  0.246706  0.319459   
+         
+                     g         h         i   {\ldots}    Previous\_latitude  \textbackslash{}
+         0    0.111879  0.155903  0.267782   {\ldots}            12.914142   
+         1    0.094145  0.191520  0.285665   {\ldots}            12.914142   
+         2    0.090494  0.174344  0.264838   {\ldots}            12.914142   
+         3    0.114891  0.166035  0.280926   {\ldots}            12.914142   
+         4    0.101509  0.200519  0.302028   {\ldots}            12.914142   
+         5    0.103294  0.152674  0.255968   {\ldots}            12.914142   
+         6    0.103503  0.175213  0.278716   {\ldots}            12.914142   
+         7    0.116135  0.155930  0.272065   {\ldots}            12.914142   
+         8    0.107232  0.196172  0.303404   {\ldots}            12.971599   
+         9    0.123665  0.213836  0.337501   {\ldots}            12.971599   
+         10   0.103484  0.174475  0.277959   {\ldots}            12.971599   
+         11   0.106448  0.176636  0.283084   {\ldots}            12.971599   
+         12   0.099525  0.176000  0.275525   {\ldots}            12.971599   
+         13   0.095956  0.170800  0.266756   {\ldots}            12.971599   
+         14   0.089630  0.186125  0.275755   {\ldots}            12.971599   
+         15   0.091296  0.182363  0.273659   {\ldots}            12.971599   
+         16   0.111750  0.168374  0.280124   {\ldots}            12.971599   
+         17   0.095774  0.196121  0.291895   {\ldots}            12.971599   
+         18   0.100222  0.168663  0.268885   {\ldots}            12.971599   
+         19   0.105503  0.171630  0.277133   {\ldots}            12.971599   
+         20   0.104143  0.150265  0.254408   {\ldots}            17.385044   
+         21   0.084993  0.173758  0.258751   {\ldots}            17.385044   
+         22   0.075888  2.718690  2.794578   {\ldots}            17.385044   
+         23   0.086762  0.192530  0.279292   {\ldots}            17.385044   
+         24   0.087188  0.181895  0.269083   {\ldots}            17.385044   
+         25   0.086865  0.227050  0.313915   {\ldots}            17.385044   
+         26   0.093047  0.186510  0.279557   {\ldots}            17.385044   
+         27   0.100920  0.181726  0.282646   {\ldots}            17.385044   
+         28   0.089581  0.192994  0.282575   {\ldots}            17.385044   
+         29   0.091544  0.189296  0.280840   {\ldots}            17.385044   
+         ..        {\ldots}       {\ldots}       {\ldots}   {\ldots}                  {\ldots}   
+         370  0.103629  0.289511  0.393140   {\ldots}           -33.868820   
+         371  0.056099  0.318409  0.374508   {\ldots}            19.075983   
+         372  0.093159  0.307386  0.400545   {\ldots}            42.331429   
+         373  0.092819  0.250871  0.343690   {\ldots}           -33.868820   
+         374  0.011182  1.876498  1.887680   {\ldots}            19.075983   
+         375  0.105986  0.295416  0.401402   {\ldots}           -33.868820   
+         376  0.078462  0.318579  0.397041   {\ldots}           -33.868820   
+         377  0.070951  1.730752  1.801703   {\ldots}            17.385044   
+         378  0.079192  0.433120  0.512312   {\ldots}            36.778259   
+         379  0.061449  0.303281  0.364730   {\ldots}            36.778259   
+         380  0.049965  0.323428  0.373393   {\ldots}            36.778259   
+         381  0.111991  0.218722  0.330713   {\ldots}            12.971599   
+         382  0.073299  0.368330  0.441629   {\ldots}            42.331429   
+         383  0.077144  3.514770  3.591914   {\ldots}            17.385044   
+         384  0.081670  0.402541  0.484211   {\ldots}            17.385044   
+         385  0.054899  2.139276  2.194175   {\ldots}            42.331429   
+         386  0.066712  0.304881  0.371593   {\ldots}            34.083672   
+         387  0.062291  0.600932  0.663223   {\ldots}            12.971599   
+         388  0.063635  0.405597  0.469232   {\ldots}            12.971599   
+         389  0.068745  0.355273  0.424018   {\ldots}            12.971599   
+         390  0.085205  0.451699  0.536904   {\ldots}            36.778259   
+         391  0.077001  0.331855  0.408856   {\ldots}            17.385044   
+         392  0.069940  0.298894  0.368834   {\ldots}            34.083672   
+         393  0.073878  0.332589  0.406467   {\ldots}            19.075983   
+         394  0.062953  0.589164  0.652117   {\ldots}            12.971599   
+         395  0.092422  0.233860  0.326282   {\ldots}            36.778259   
+         396  0.081431  0.340915  0.422346   {\ldots}            28.704060   
+         397  0.082195  0.335884  0.418079   {\ldots}            12.971599   
+         398  0.062964  0.363273  0.426237   {\ldots}            28.704060   
+         399  0.068451  0.300868  0.369319   {\ldots}            34.083672   
+         
+              Previous\_longitude  Previous\_latitude.1  Present\_longitude  pressure\_s  \textbackslash{}
+         0             74.855957            12.914142          74.855957       801.0   
+         1             74.855957            12.971599          77.594566       939.0   
+         2             74.855957            17.385044          78.486671       899.0   
+         3             74.855957            42.331429         -83.045753       913.0   
+         4             74.855957            36.778259        -119.417931       949.0   
+         5             74.855957            28.704060          77.102493       846.0   
+         6             74.855957            13.082680          80.270721       964.0   
+         7             74.855957            19.075983          72.877655       905.0   
+         8             77.594566            34.083672          74.797279       656.0   
+         9             77.594566           -33.868820         151.209290       863.0   
+         10            77.594566            12.914142          74.855957       922.0   
+         11            77.594566            12.971599          77.594566       877.0   
+         12            77.594566            17.385044          78.486671       772.0   
+         13            77.594566            42.331429         -83.045753       467.0   
+         14            77.594566            36.778259        -119.417931       823.0   
+         15            77.594566            28.704060          77.102493       960.0   
+         16            77.594566            13.082680          80.270721       644.0   
+         17            77.594566            19.075983          72.877655       948.0   
+         18            77.594566            34.083672          74.797279       832.0   
+         19            77.594566           -33.868820         151.209290       897.0   
+         20            78.486671            12.914142          74.855957       737.0   
+         21            78.486671            12.971599          77.594566       797.0   
+         22            78.486671            17.385044          78.486671       930.0   
+         23            78.486671            42.331429         -83.045753       851.0   
+         24            78.486671            36.778259        -119.417931       621.0   
+         25            78.486671            28.704060          77.102493       923.0   
+         26            78.486671            13.082680          80.270721       485.0   
+         27            78.486671            19.075983          72.877655       889.0   
+         28            78.486671            34.083672          74.797279       931.0   
+         29            78.486671           -33.868820         151.209290       924.0   
+         ..                  {\ldots}                  {\ldots}                {\ldots}         {\ldots}   
+         370          151.209290            19.075983          72.877655       685.0   
+         371           72.877655            13.082680          80.270721       264.0   
+         372          -83.045753            12.914142          74.855957       729.0   
+         373          151.209290            36.778259        -119.417931       386.5   
+         374           72.877655            28.704060          77.102493       497.0   
+         375          151.209290           -33.868820         151.209290       337.0   
+         376          151.209290            12.971599          77.594566       805.0   
+         377           78.486671            19.075983          72.877655       423.5   
+         378         -119.417931           -33.868820         151.209290       789.0   
+         379         -119.417931            12.971599          77.594566       729.0   
+         380         -119.417931            36.778259        -119.417931       671.0   
+         381           77.594566            12.914142          74.855957       752.0   
+         382          -83.045753            42.331429         -83.045753       431.0   
+         383           78.486671            13.082680          80.270721       431.0   
+         384           78.486671            42.331429         -83.045753       426.0   
+         385          -83.045753            13.082680          80.270721       716.0   
+         386           74.797279           -33.868820         151.209290       210.0   
+         387           77.594566           -33.868820         151.209290       737.0   
+         388           77.594566            13.082680          80.270721       741.0   
+         389           77.594566           -33.868820         151.209290       530.0   
+         390         -119.417931            34.083672          74.797279       521.0   
+         391           78.486671            28.704060          77.102493       667.0   
+         392           74.797279            34.083672          74.797279       357.0   
+         393           72.877655            17.385044          78.486671       822.0   
+         394           77.594566            34.083672          74.797279       910.0   
+         395         -119.417931            12.914142          74.855957       829.0   
+         396           77.102493            12.914142          74.855957       731.0   
+         397           77.594566            12.971599          77.594566       394.5   
+         398           77.102493            19.075983          72.877655       408.5   
+         399           74.797279            28.704060          77.102493       722.0   
+         
+              pressure\_h  pressure\_i  pressure\_v  pressure\_a  output  
+         0         796.0       368.0       690.0       798.0       1  
+         1         719.0       928.0       831.0       409.0       1  
+         2         353.0       956.0       907.0       624.0       1  
+         3         593.0       886.0       931.0       934.0       1  
+         4         603.0       905.0       925.0       911.0       1  
+         5         827.0       564.0       279.0       924.0       1  
+         6         600.0       961.0       754.0       953.0       1  
+         7         736.0       322.0       920.0       809.0       1  
+         8         441.0       924.0       320.0       934.0       1  
+         9         939.0       914.0       914.0       888.0       1  
+         10        628.0       245.0       871.0       909.0       1  
+         11        493.0       735.0       668.0       810.0       1  
+         12        807.0       424.0       472.0       900.0       1  
+         13        825.0       949.0       495.0       934.0       1  
+         14        837.0       955.0       934.0       630.0       1  
+         15        301.0       901.0       693.0       800.0       1  
+         16        835.0       965.0       947.0       959.0       1  
+         17        841.0       940.0       951.0       218.0       1  
+         18        554.0       847.0       930.0       841.0       1  
+         19        431.0       909.0       685.0       932.0       1  
+         20        838.0       848.0       630.0       646.0       1  
+         21        740.0       524.0       920.0       918.0       1  
+         22        614.0       896.0       701.0       919.0       1  
+         23        716.0       247.0       844.0       647.0       1  
+         24        242.0       916.0       905.0       450.0       1  
+         25        265.0       108.0       903.0       660.0       1  
+         26        377.0       815.0       927.0       638.0       1  
+         27        427.0       942.0       175.0       914.0       1  
+         28        600.0       552.0       397.0       380.0       1  
+         29        244.0       953.0       875.0       880.0       1  
+         ..          {\ldots}         {\ldots}         {\ldots}         {\ldots}     {\ldots}  
+         370       743.0       699.0       365.0       507.0       0  
+         371       435.0       791.0       830.0       665.0       0  
+         372       796.0       881.0       605.0       105.0       0  
+         373       748.0       665.0       176.0       435.0       0  
+         374       561.0       832.0       536.0       629.0       0  
+         375       570.0       734.0       647.0       608.0       0  
+         376       915.0       870.0       609.0       947.0       0  
+         377       807.0       766.0       339.0       692.0       0  
+         378       834.0       526.0       709.0       624.0       0  
+         379       462.0       897.0       390.0       748.0       0  
+         380       839.0       251.0       566.0       627.0       0  
+         381       505.0       939.0       918.0       371.0       0  
+         382       806.0       899.0       705.0       707.0       0  
+         383       806.0       899.0       705.0       707.0       0  
+         384       875.0       814.0       852.0       628.0       0  
+         385       822.0       164.0       368.0       634.0       0  
+         386       882.0       446.0       890.0       652.0       0  
+         387       817.0       790.0       249.0       719.0       0  
+         388       949.0       819.0       401.5       895.0       0  
+         389       836.0       844.0       232.0       661.0       0  
+         390       797.0       549.0       572.0       402.0       0  
+         391       591.0       860.0       731.0       616.0       0  
+         392       850.0       259.0       676.0       721.0       0  
+         393       844.0       404.0       277.0       633.0       0  
+         394       938.0       800.0       662.0       647.0       0  
+         395       860.0       888.0       536.0       790.0       0  
+         396       471.0       183.0       759.0       670.0       0  
+         397       805.0       615.0       101.0       371.0       0  
+         398       831.0       897.0       732.0       631.0       0  
+         399       775.0       371.0       357.0       867.0       0  
+         
+         [1400 rows x 33 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}100}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{utils} \PY{k}{import} \PY{n}{shuffle}
+          \PY{n}{df} \PY{o}{=} \PY{n}{shuffle}\PY{p}{(}\PY{n}{df\PYZus{}train}\PY{p}{)}
+          \PY{n}{df}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}100}]:}        Name         a         b         c         d         e         f  \textbackslash{}
+          722   shiva  0.115494  0.126623  0.242117  0.077901  0.170241  0.248142   
+          797   shiva  0.138628  0.096789  0.235417  0.076985  0.176209  0.253194   
+          540   shiva  0.138374  0.163481  0.301855  0.077681  0.172986  0.250667   
+          609   shiva  0.121382  0.139041  0.260423  0.091582  0.187295  0.278877   
+          247  fshiva  0.139541  0.193026  0.332567  0.070956  0.260510  0.331466   
+          350  fshiva  0.149787  0.193358  0.343145  0.065759  0.263457  0.329216   
+          758   shiva  0.129697  0.065921  0.195618  0.061359  0.208795  0.270154   
+          171   shiva  0.155924  0.114053  0.269977  0.075002  0.178864  0.253866   
+          655   shiva  0.144395  0.096431  0.240826  0.086603  0.168165  0.254768   
+          831   shiva  0.138711  0.054780  0.193491  0.046592  0.183869  0.230461   
+          847   shiva  0.116613  0.134994  0.251607  0.089936  0.917785  1.007721   
+          687   shiva  0.159392  0.094771  0.254163  0.087979  0.177720  0.265699   
+          747   shiva  0.135420  0.090221  0.225641  0.081766  0.247706  0.329472   
+          957   shiva  0.139550  0.083176  0.222726  0.069658  0.171157  0.240815   
+          284  fshiva  0.153799  0.366636  0.520435  0.077743  0.695374  0.773117   
+          596   shiva  0.157475  0.104675  0.262150  0.066637  0.177962  0.244599   
+          852   shiva  0.136696  0.078271  0.214967  0.069794  0.196169  0.265963   
+          231  fshiva  0.113824  0.233790  0.347614  0.073675  0.216214  0.289889   
+          275  fshiva  0.132317  0.274165  0.406482  0.067457  0.306645  0.374102   
+          394   shiva  0.155924  0.114053  0.269977  0.075002  0.178864  0.253866   
+          252  fshiva  0.143176  0.648242  0.791418  0.066525  0.493274  0.559799   
+          381  fshiva  0.171424  0.216911  0.388335  0.172012  0.072334  0.244346   
+          359  fshiva  0.129067  0.197330  0.326397  0.079712  0.221713  0.301425   
+          323  fshiva  0.137905  0.210750  0.348655  0.064556  0.252676  0.317232   
+          806   shiva  0.157475  0.104675  0.262150  0.066637  0.177962  0.244599   
+          135  fshiva  0.112465  0.365633  0.478098  0.072247  0.267921  0.340168   
+          161   shiva  0.134011  0.109762  0.243773  0.075586  0.183922  0.259508   
+          681   shiva  0.131473  0.110212  0.241685  0.075321  0.182045  0.257366   
+          374  fshiva  0.118851  0.098664  0.217515  0.064784  0.133224  0.198008   
+          851   shiva  0.145500  0.163401  0.308901  0.139617  0.194402  0.334019   
+          ..      {\ldots}       {\ldots}       {\ldots}       {\ldots}       {\ldots}       {\ldots}       {\ldots}   
+          815   shiva  0.148794  0.129707  0.278501  0.085575  0.162796  0.248371   
+          563   shiva  0.154858  0.134962  0.289820  0.081892  0.173270  0.255162   
+          55    shiva  0.143632  0.116319  0.259951  0.094654  0.164277  0.258931   
+          734   shiva  0.119602  0.101691  0.221293  0.078854  0.183186  0.262040   
+          306   shiva  0.135964  0.090487  0.226451  0.083830  0.159850  0.243680   
+          877   shiva  0.136696  0.078271  0.214967  0.069794  0.196169  0.265963   
+          827   shiva  0.134548  0.109482  0.244030  0.073934  0.193804  0.267738   
+          894   shiva  0.138374  0.163481  0.301855  0.077681  0.172986  0.250667   
+          256   shiva  0.148794  0.129707  0.278501  0.085575  0.162796  0.248371   
+          121  fshiva  0.150817  0.163130  0.313947  0.076482  0.271771  0.348253   
+          64   fshiva  0.126349  0.208448  0.334797  0.044631  0.277285  0.321916   
+          14    shiva  0.117640  0.113628  0.231268  0.086285  0.167559  0.253844   
+          254   shiva  0.116510  0.153594  0.270104  0.101442  0.172223  0.273665   
+          516   shiva  0.127765  0.088740  0.216505  0.075840  0.166529  0.242369   
+          897   shiva  0.152559  0.103573  0.256132  0.073079  0.173675  0.246754   
+          209   shiva  0.118013  0.092016  0.210029  0.061421  0.192829  0.254250   
+          219  fshiva  0.148311  0.163796  0.312107  0.075719  0.173984  0.249703   
+          279   shiva  0.134955  0.095523  0.230478  0.080458  0.172037  0.252495   
+          598   shiva  0.130372  0.100708  0.231080  0.072686  0.185937  0.258623   
+          303   shiva  0.111821  0.144867  0.256688  0.079857  0.173709  0.253566   
+          289  fshiva  0.119036  0.259523  0.378559  0.061658  0.288697  0.350355   
+          895   shiva  0.141601  0.202045  0.343646  0.070925  0.194591  0.265516   
+          363  fshiva  0.166452  0.512925  0.679377  0.072721  0.248519  0.321240   
+          528   shiva  0.149134  0.095284  0.244418  0.078049  0.186720  0.264769   
+          89    shiva  0.138711  0.054780  0.193491  0.046592  0.183869  0.230461   
+          131   shiva  0.145521  0.089175  0.234696  0.071262  0.177430  0.248692   
+          134   shiva  0.134548  0.109482  0.244030  0.073934  0.193804  0.267738   
+          128   shiva  0.151715  0.095035  0.246750  0.078456  0.219079  0.297535   
+          395   shiva  0.137361  0.101158  0.238519  0.072627  0.175327  0.247954   
+          78   fshiva  0.143797  0.226830  0.370627  0.075545  0.278318  0.353863   
+          
+                      g         h         i   {\ldots}    Previous\_latitude  \textbackslash{}
+          722  0.105503  0.171630  0.277133   {\ldots}            12.971599   
+          797  0.097623  0.189427  0.287050   {\ldots}            28.704060   
+          540  0.086415  0.176471  0.262886   {\ldots}            19.075983   
+          609  0.089090  0.238548  0.327638   {\ldots}           -33.868820   
+          247  0.067943  0.374681  0.442624   {\ldots}            36.778259   
+          350  0.079233  1.690644  1.769877   {\ldots}            42.331429   
+          758  0.123665  0.213836  0.337501   {\ldots}            12.971599   
+          171  0.079202  0.194325  0.273527   {\ldots}            19.075983   
+          655  0.091416  0.161948  0.253364   {\ldots}            34.083672   
+          831  0.062178  0.215202  0.277380   {\ldots}            34.083672   
+          847  0.074449  0.246173  0.320622   {\ldots}           -33.868820   
+          687  0.089006  0.178423  0.267429   {\ldots}            36.778259   
+          747  0.107563  0.222560  0.330123   {\ldots}            34.083672   
+          957  0.116579  0.167481  0.284060   {\ldots}            42.331429   
+          284  0.077838  0.625723  0.703561   {\ldots}            12.914142   
+          596  0.116807  0.168576  0.285383   {\ldots}            36.778259   
+          852  0.065855  0.898610  0.964465   {\ldots}            13.082680   
+          231  0.080221  0.252305  0.332526   {\ldots}            34.083672   
+          275  0.065013  0.342715  0.407728   {\ldots}            34.083672   
+          394  0.079202  0.194325  0.273527   {\ldots}            19.075983   
+          252  0.065243  0.667238  0.732481   {\ldots}            12.914142   
+          381  0.111991  0.218722  0.330713   {\ldots}            12.971599   
+          359  0.104450  0.323471  0.427921   {\ldots}            34.083672   
+          323  0.059266  0.361556  0.420822   {\ldots}            36.778259   
+          806  0.116807  0.168576  0.285383   {\ldots}            36.778259   
+          135  0.078462  0.318579  0.397041   {\ldots}           -33.868820   
+          161  0.100524  0.154683  0.255207   {\ldots}            13.082680   
+          681  0.091061  0.191270  0.282331   {\ldots}           -33.868820   
+          374  0.011182  1.876498  1.887680   {\ldots}            19.075983   
+          851  0.085928  0.199236  0.285164   {\ldots}            34.083672   
+          ..        {\ldots}       {\ldots}       {\ldots}   {\ldots}                  {\ldots}   
+          815  0.096657  0.195293  0.291950   {\ldots}            28.704060   
+          563  0.092889  0.196553  0.289442   {\ldots}            28.704060   
+          55   0.104290  0.191550  0.295840   {\ldots}            28.704060   
+          734  0.087973  0.931685  1.019658   {\ldots}           -33.868820   
+          306  0.095956  0.170800  0.266756   {\ldots}            12.971599   
+          877  0.065855  0.898610  0.964465   {\ldots}            13.082680   
+          827  0.097007  0.192129  0.289136   {\ldots}            13.082680   
+          894  0.086415  0.176471  0.262886   {\ldots}            19.075983   
+          256  0.096657  0.195293  0.291950   {\ldots}            28.704060   
+          121  0.087541  0.292336  0.379877   {\ldots}            19.075983   
+          64   0.070903  0.942134  1.013037   {\ldots}            13.082680   
+          14   0.089630  0.186125  0.275755   {\ldots}            12.971599   
+          254  0.095774  0.196121  0.291895   {\ldots}            12.971599   
+          516  0.103503  0.175213  0.278716   {\ldots}            12.914142   
+          897  0.094507  0.178855  0.273362   {\ldots}            36.778259   
+          209  0.101509  0.200519  0.302028   {\ldots}            12.914142   
+          219  0.082884  0.270923  0.353807   {\ldots}            42.331429   
+          279  0.084993  0.173758  0.258751   {\ldots}            17.385044   
+          598  0.104723  0.160803  0.265526   {\ldots}            42.331429   
+          303  0.084602  0.193849  0.278451   {\ldots}           -33.868820   
+          289  0.089714  0.242996  0.332710   {\ldots}            34.083672   
+          895  0.081707  0.178405  0.260112   {\ldots}           -33.868820   
+          363  0.097471  0.175877  0.273348   {\ldots}            17.385044   
+          528  0.111879  0.155903  0.267782   {\ldots}            12.914142   
+          89   0.062178  0.215202  0.277380   {\ldots}            34.083672   
+          131  0.094635  0.178830  0.273465   {\ldots}            42.331429   
+          134  0.097007  0.192129  0.289136   {\ldots}            13.082680   
+          128  0.091544  0.189296  0.280840   {\ldots}            17.385044   
+          395  0.096548  0.162680  0.259228   {\ldots}            42.331429   
+          78   0.077128  0.343568  0.420696   {\ldots}            19.075983   
+          
+               Previous\_longitude  Previous\_latitude.1  Present\_longitude  pressure\_s  \textbackslash{}
+          722           77.594566           -33.868820         151.209290       859.0   
+          797           77.102493            13.082680          80.270721       859.0   
+          540           72.877655           -33.868820         151.209290       844.0   
+          609          151.209290            13.082680          80.270721       944.0   
+          247         -119.417931            19.075983          72.877655       629.0   
+          350          -83.045753            19.075983          72.877655       389.5   
+          758           77.594566           -33.868820         151.209290       823.0   
+          171           72.877655            34.083672          74.797279       798.0   
+          655           74.797279            28.704060          77.102493       618.0   
+          831           74.797279           -33.868820         151.209290       809.0   
+          847          151.209290            17.385044          78.486671       838.0   
+          687         -119.417931            12.914142          74.855957       912.0   
+          747           74.797279            19.075983          72.877655       755.0   
+          957          -83.045753            12.971599          77.594566       901.0   
+          284           74.855957            13.082680          80.270721       838.5   
+          596         -119.417931            34.083672          74.797279       838.0   
+          852           80.270721            13.082680          80.270721       851.0   
+          231           74.797279            12.971599          77.594566       752.0   
+          275           74.797279            13.082680          80.270721       216.0   
+          394           72.877655            34.083672          74.797279       946.0   
+          252           74.855957            42.331429         -83.045753       802.0   
+          381           77.594566            12.914142          74.855957       752.0   
+          359           74.797279            42.331429         -83.045753       601.0   
+          323         -119.417931            42.331429         -83.045753       729.0   
+          806         -119.417931            34.083672          74.797279       918.0   
+          135          151.209290            12.971599          77.594566       716.0   
+          161           80.270721           -33.868820         151.209290       938.0   
+          681          151.209290            36.778259        -119.417931       812.0   
+          374           72.877655            28.704060          77.102493       497.0   
+          851           74.797279            42.331429         -83.045753       773.0   
+          ..                  {\ldots}                  {\ldots}                {\ldots}         {\ldots}   
+          815           77.102493            36.778259        -119.417931       953.0   
+          563           77.102493            34.083672          74.797279       944.0   
+          55            77.102493            28.704060          77.102493       932.0   
+          734          151.209290            42.331429         -83.045753       905.0   
+          306           77.594566            42.331429         -83.045753       939.0   
+          877           80.270721            13.082680          80.270721       656.0   
+          827           80.270721            28.704060          77.102493       864.0   
+          894           72.877655           -33.868820         151.209290       878.0   
+          256           77.102493            36.778259        -119.417931       868.0   
+          121           72.877655            12.971599          77.594566       607.0   
+          64            80.270721            36.778259        -119.417931       407.0   
+          14            77.594566            36.778259        -119.417931       823.0   
+          254           77.594566            19.075983          72.877655       838.0   
+          516           74.855957            13.082680          80.270721       581.0   
+          897         -119.417931            17.385044          78.486671       819.0   
+          209           74.855957            36.778259        -119.417931       948.0   
+          219          -83.045753            34.083672          74.797279       507.0   
+          279           78.486671            12.971599          77.594566       960.0   
+          598          -83.045753            12.914142          74.855957       936.0   
+          303          151.209290            34.083672          74.797279       899.0   
+          289           74.797279            17.385044          78.486671       327.5   
+          895          151.209290            12.914142          74.855957       964.0   
+          363           78.486671            12.971599          77.594566       499.0   
+          528           74.855957            12.914142          74.855957       700.0   
+          89            74.797279           -33.868820         151.209290       824.0   
+          131          -83.045753           -33.868820         151.209290       889.0   
+          134           80.270721            28.704060          77.102493       787.0   
+          128           78.486671           -33.868820         151.209290       838.0   
+          395          -83.045753            34.083672          74.797279       944.0   
+          78            72.877655            34.083672          74.797279       910.0   
+          
+               pressure\_h  pressure\_i  pressure\_v  pressure\_a  output  
+          722       596.0       905.0       828.0       611.0       1  
+          797       596.0       905.0       828.0       611.0       1  
+          540       929.0       928.0       894.0       841.0       1  
+          609       361.0       926.0       885.0       800.0       1  
+          247       882.0       819.0       603.0       527.0       0  
+          350       331.0       320.0       371.0       585.0       0  
+          758       837.0       955.0       934.0       630.0       1  
+          171       247.0       951.0       408.0       767.0       1  
+          655       498.0       848.0       672.0       851.0       1  
+          831       622.0       942.0       940.0       770.0       1  
+          847       629.0       831.0       917.0       692.0       1  
+          687       775.0       891.0       259.0       641.0       1  
+          747       320.0       354.0       680.0       932.0       1  
+          957       659.0       881.0       406.0       939.0       1  
+          284       457.0       944.0       391.0       406.0       0  
+          596       704.0       955.0       776.0       777.0       1  
+          852       716.0       247.0       844.0       647.0       1  
+          231       505.0       939.0       918.0       371.0       0  
+          275       734.0       599.0       479.0       331.0       0  
+          394       379.0       957.0       870.0       955.0       1  
+          252       933.0       621.0       340.0       867.0       0  
+          381       505.0       939.0       918.0       371.0       0  
+          359       942.0       469.0       561.0       293.0       0  
+          323       462.0       897.0       390.0       748.0       0  
+          806       738.0       344.0       828.0       893.0       1  
+          135       822.0       164.0       368.0       634.0       0  
+          161       613.0       950.0       911.0       895.0       1  
+          681       704.0       861.0       953.0       779.0       1  
+          374       561.0       832.0       536.0       629.0       0  
+          851       853.0       942.0       838.0       808.0       1  
+          ..          {\ldots}         {\ldots}         {\ldots}         {\ldots}     {\ldots}  
+          815       516.0       861.0       899.0       909.0       1  
+          563       636.0       780.0       749.0       920.0       1  
+          55        607.0       805.0       776.0       653.0       1  
+          734       779.0       922.0       808.0       901.0       1  
+          306       601.0       920.0       886.0       901.0       1  
+          877       441.0       924.0       320.0       934.0       1  
+          827       741.0       880.0       101.0       738.0       1  
+          894       828.0       745.0       705.0       930.0       1  
+          256       616.0       746.0       949.0       916.0       1  
+          121       763.0       674.0       192.0       390.0       0  
+          64        831.0       309.0       617.0       713.0       0  
+          14        837.0       955.0       934.0       630.0       1  
+          254       629.0       831.0       917.0       692.0       1  
+          516       675.0       921.0       871.0       849.0       1  
+          897       677.0       815.0       932.0       896.0       1  
+          209       717.0       932.0       933.0       935.0       1  
+          219       733.0       681.0       354.0       450.0       0  
+          279       301.0       901.0       693.0       800.0       1  
+          598       664.0       923.0       781.0       808.5       1  
+          303       353.0       956.0       907.0       624.0       1  
+          289       497.0       769.0       295.0       730.0       0  
+          895       714.0       786.0       941.0       925.0       1  
+          363       644.0       777.0       389.0       604.0       0  
+          528       679.0       907.0       932.0       925.0       1  
+          89        786.0       839.0       941.0       941.0       1  
+          131       593.0       932.0       900.0       860.0       1  
+          134       632.0       933.0       357.0       730.0       1  
+          128       562.0       920.0       905.0       893.0       1  
+          395       636.0       780.0       749.0       920.0       1  
+          78        938.0       800.0       662.0       647.0       0  
+          
+          [1400 rows x 33 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}101}]:} \PY{n}{df1}\PY{o}{=}\PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{20}\PY{p}{]}
+          \PY{n}{df2}\PY{o}{=}\PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{23}\PY{p}{:}\PY{p}{]}
+          \PY{n}{df}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{df1}\PY{p}{,}\PY{n}{df2}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{array} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{values}
+          \PY{n}{X} \PY{o}{=} \PY{n}{array}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{21}\PY{p}{]}
+          \PY{n}{Y} \PY{o}{=} \PY{n}{array}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}102}]:} \PY{n}{X}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}102}]:} (1400, 21)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}103}]:} \PY{n}{Y}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}103}]:} array([1., 1., 1., {\ldots}, 1., 1., 0.])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}104}]:} \PY{c+c1}{\PYZsh{} Load libraries}
+          \PY{k+kn}{import} \PY{n+nn}{pandas}
+          \PY{k+kn}{from} \PY{n+nn}{pandas}\PY{n+nn}{.}\PY{n+nn}{plotting} \PY{k}{import} \PY{n}{scatter\PYZus{}matrix}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{model\PYZus{}selection}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{classification\PYZus{}report}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{confusion\PYZus{}matrix}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{accuracy\PYZus{}score}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LogisticRegression}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{tree} \PY{k}{import} \PY{n}{DecisionTreeClassifier}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neighbors} \PY{k}{import} \PY{n}{KNeighborsClassifier}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{discriminant\PYZus{}analysis} \PY{k}{import} \PY{n}{LinearDiscriminantAnalysis}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{naive\PYZus{}bayes} \PY{k}{import} \PY{n}{GaussianNB}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{SVC}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}105}]:} \PY{n}{validation\PYZus{}size} \PY{o}{=} \PY{l+m+mf}{0.20}
+          \PY{n}{seed} \PY{o}{=} \PY{l+m+mi}{7}
+          \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}validation}\PY{p}{,} \PY{n}{Y\PYZus{}train}\PY{p}{,} \PY{n}{Y\PYZus{}validation} \PY{o}{=} \PY{n}{model\PYZus{}selection}\PY{o}{.}\PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{n}{validation\PYZus{}size}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n}{seed}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}106}]:} \PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}106}]:} (1120, 21)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}107}]:} \PY{n}{Y\PYZus{}train}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}107}]:} (1120,)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}108}]:} \PY{n}{X\PYZus{}train}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}108}]:} array([[ 1.40556812e-01,  5.08879185e-01,  6.49435997e-01, {\ldots},
+                   0.00000000e+00,  1.29141420e+01,  7.48559570e+01],
+                 [ 1.38710976e-01,  5.47800060e-02,  1.93490982e-01, {\ldots},
+                   0.00000000e+00,  3.40836720e+01,  7.47972790e+01],
+                 [ 1.25925064e-01,  8.71610640e-02,  2.13086128e-01, {\ldots},
+                   0.00000000e+00, -3.38688200e+01,  1.51209290e+02],
+                 {\ldots},
+                 [ 1.35076046e-01,  1.92456961e-01,  3.27533007e-01, {\ldots},
+                   0.00000000e+00,  1.90759830e+01,  7.28776550e+01],
+                 [ 1.32246971e-01,  1.07153893e-01,  2.39400864e-01, {\ldots},
+                   1.00000000e+00,  1.29715990e+01,  7.75945660e+01],
+                 [ 1.32393122e-01,  1.22807980e-01,  2.55201101e-01, {\ldots},
+                   0.00000000e+00,  1.90759830e+01,  7.28776550e+01]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LogisticRegression}
+         \PY{n}{logisticRegr} \PY{o}{=} \PY{n}{LogisticRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{logisticRegr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{Y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}user\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}logistic.py:432: FutureWarning: Default solver will be changed to 'lbfgs' in 0.22. Specify a solver to silence this warning.
+  FutureWarning)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}70}]:} LogisticRegression(C=1.0, class\_weight=None, dual=False, fit\_intercept=True,
+                            intercept\_scaling=1, l1\_ratio=None, max\_iter=100,
+                            multi\_class='warn', n\_jobs=None, penalty='l2',
+                            random\_state=None, solver='warn', tol=0.0001, verbose=0,
+                            warm\_start=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{n}{y\PYZus{}pred}\PY{o}{=}\PY{n}{logisticRegr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}validation}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{metrics} 
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{logistic regression model accuracy:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{metrics}\PY{o}{.}\PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{Y\PYZus{}validation}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+logistic regression model accuracy: 0.9892857142857143
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{svm}
+         \PY{n}{svc} \PY{o}{=} \PY{n}{svm}\PY{o}{.}\PY{n}{SVC}\PY{p}{(}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{svc}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{Y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}73}]:} SVC(C=1.0, cache\_size=200, class\_weight=None, coef0=0.0,
+             decision\_function\_shape='ovr', degree=3, gamma='auto\_deprecated',
+             kernel='linear', max\_iter=-1, probability=False, random\_state=None,
+             shrinking=True, tol=0.001, verbose=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}74}]:} \PY{n}{y\PYZus{}pred}\PY{o}{=}\PY{n}{svc}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}validation}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{metrics} 
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{svm model accuracy:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{metrics}\PY{o}{.}\PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}pred}\PY{p}{,} \PY{n}{Y\PYZus{}validation}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+svm model accuracy: 0.8142857142857143
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}109}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{cross\PYZus{}val\PYZus{}score}
+          \PY{n}{clf} \PY{o}{=}  \PY{n}{LogisticRegression}\PY{p}{(}\PY{p}{)}
+          \PY{n}{scores} \PY{o}{=} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}user\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}logistic.py:432: FutureWarning: Default solver will be changed to 'lbfgs' in 0.22. Specify a solver to silence this warning.
+  FutureWarning)
+C:\textbackslash{}Users\textbackslash{}user\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}logistic.py:432: FutureWarning: Default solver will be changed to 'lbfgs' in 0.22. Specify a solver to silence this warning.
+  FutureWarning)
+C:\textbackslash{}Users\textbackslash{}user\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}logistic.py:432: FutureWarning: Default solver will be changed to 'lbfgs' in 0.22. Specify a solver to silence this warning.
+  FutureWarning)
+C:\textbackslash{}Users\textbackslash{}user\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}logistic.py:432: FutureWarning: Default solver will be changed to 'lbfgs' in 0.22. Specify a solver to silence this warning.
+  FutureWarning)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}110}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy: }\PY{l+s+si}{\PYZpc{}0.2f}\PY{l+s+s2}{ (+/\PYZhy{} }\PY{l+s+si}{\PYZpc{}0.2f}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{scores}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{scores}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accuracy: 0.95 (+/- 0.05)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}111}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{cross\PYZus{}val\PYZus{}score}
+          \PY{n}{clf} \PY{o}{=} \PY{n}{svm}\PY{o}{.}\PY{n}{SVC}\PY{p}{(}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{C}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{scores1} \PY{o}{=} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+          \PY{n}{scores1}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}111}]:} array([0.87857143, 0.83928571, 0.85357143, 0.89285714, 0.84642857])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}112}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy: }\PY{l+s+si}{\PYZpc{}0.2f}\PY{l+s+s2}{ (+/\PYZhy{} }\PY{l+s+si}{\PYZpc{}0.2f}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{scores1}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{scores1}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accuracy: 0.86 (+/- 0.04)
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

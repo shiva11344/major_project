@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<meta charset="UTF-8">
+		<title>VIDEO</title>
+		<!-- Include basic JQuery and JQuery UI files -->
+	<script src="lib/jquery/jquery.js"></script>		
+	<link href="lib/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css">
+	<script src="lib/jquery-ui/jquery-ui.min.js"></script>		
+ 
+ 
+	<style>
+body, html {
+    top: 0;
+    display: inline-block !important;
+    margin: 0;
+    padding:0;
+    left: 0;
+    width: 100%;
+}
+.plyr__control--overlaid svg {
+    left: 18px !important;
+    position: relative;
+}
+.plyr--full-ui.plyr--video .plyr__control--overlaid {
+    display: block;
+    height: 80px;
+    width: 80px;
+}
+.plyr--video .plyr__control.plyr__tab-focus, .plyr--video .plyr__control:hover, .plyr--video .plyr__control[aria-expanded=true] {
+    background: #1680ff !important;
+    color: #fff;
+}
+#.plyr__control--overlaid svg {
+#    left: 23px !important;
+#    position: relative;
+#    top: 20px !important;
+#}
+
+#.plyr__control svg {
+#    display: block;
+#    fill: currentColor;
+#    height: 60px !important;
+#    pointer-events: none;
+#    width: 60px !important;
+#}
+.plyr {
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,.2);
+    margin: 0px auto !important;
+}
+video.loading {
+  background: black url(/loading.svg) center center no-repeat !important;
+  #z-index:9999999999999;
+}
+</style>
+	
+
+ <!-- Polyfills -->
+        <script
+            src="https://cdn.polyfill.io/v3/polyfill.min.js?features=es6,Array.prototype.includes,CustomEvent,Object.entries,Object.values,URL,Math.trunc&flags=gated"
+            crossorigin="anonymous"
+        ></script>
+
+<link rel="stylesheet" href="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.css" type="text/css"/>
+    </head>
+	<body>
+	
+
+                    <div class="player">
+<video style="width:100%;height:100%;min-height:300px;" class="video-js" ts-id="1575455597" onwaiting="onwait()" data-ckin="default" data-overlay="1" data-title="The curious case of Chameleon..." controls preload='none' width='640' height='264' style="min-height:400px;width:100%;height:100%;" name="player" id="player">
+       	
+                        <source id="mp4_src" src="" type="video/mp4" size="576">
+			<div style="display:none;" id="ts">1575455597</div>
+	</video>
+</div>
+
+      <script src="r.js?1232"></script>
+		<script src="d.js?1575455597"></script>
+
+ <script src="i2.js?1575455597"></script>
+ <script>
+setTimeout(function(){ setUrl("/cache/hQOi-aqfFsWUI5gpYVLtyg/1575593216/98uzs4oi8djx.html.mp4");
+var vidyo = "/cache/hQOi-aqfFsWUI5gpYVLtyg/1575593216/98uzs4oi8djx.html.mp4";
+	
+}, 1000);
+$(".player").one('click touch', function(event){
+	play();
+});
+	
+ function onwait() {
+  var element = document.getElementById("player");
+  element.classList.add("loading");
+	//alert("LOL");
+	}
+	
+	
+
+</script>
+<script src="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.js"></script>
+
+                    <script>
+                        var myFP = fluidPlayer('player', {
+
+
+                            layoutControls: {
+				 primaryColor: "#39D5EE",
+				preload: "none",
+				fillToContainer: true,
+                                fillToControls: true,
+				allowDownload: true                          }
+                        });
+                    </script>
+
+	</body>
+</html>
